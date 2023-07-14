@@ -98,15 +98,19 @@
 <body>
 <%
     UserPo user = (UserPo) session.getAttribute("user");
+    UserPo concern=(UserPo) session.getAttribute("concern") ;
     List<weiboPo> weiboList = (List<weiboPo>) session.getAttribute("weiboList");
 %>
 <div class="app">
     <div class="main">
         <div class="nav">
-            <h2><%=weiboList.get(0).getUsername()%>的空间</h2>
+            <h2><%=concern.getUserName()%>的空间</h2>
         </div>
         <div class="weibo">
-            <%
+            <%if(weiboList==null){%>
+            <div class="weibo-item"><span>该用户暂未发布新鲜事</span></div>
+            <%}
+                else{
                 for (weiboPo weibo : weiboList) {
             %>
             <div class="weibo-item">
@@ -145,7 +149,7 @@
                 </div>
             </div>
             <%
-                }
+                }}
             %>
         </div>
     </div>

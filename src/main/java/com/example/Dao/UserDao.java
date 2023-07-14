@@ -19,7 +19,7 @@ public class UserDao {
             if (res.next()) {
                 user.setUserId(res.getLong("user_id"));
                 user.setUserName(res.getString("username"));
-//                user.setPwd();
+                return user;
             }
         } catch (SQLException e) {
 

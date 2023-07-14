@@ -1,10 +1,10 @@
-<%@ page import="java.util.List" %>
 <%@ page import="com.example.po.UserPo" %>
+<%@ page import="java.util.List" %>
 <%@ page import="com.example.Dao.UserDao" %><%--
   Created by IntelliJ IDEA.
   User: 31749
-  Date: 2023/6/29
-  Time: 22:28
+  Date: 2023/7/9
+  Time: 17:47
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
@@ -12,71 +12,137 @@
 <head>
     <title>Title</title>
     <style>
-        .top-nav {
+        .app {
+            min-height: 100%;
+            width: 100%;
+        }
+
+        .main {
+            min-height: 100%;
+            width: auto;
+            margin-left: 10px;
+            margin-right: 10px;
+            margin-top: 10px;
+        }
+
+        .nav {
+            width: auto;
             height: 50px;
-            width: auto;
-            margin: 10px;
-            background-color: darkblue;
+            background-color: bisque;
         }
 
-        .concern-item {
+        .weibo .concern-item {
+            display: block;
+            margin: 20px;
+            background-color: bisque;
+            min-height: 100px;
             width: auto;
-            margin: 10px;
-            height: 60px;
-            display: flex;
-            background-color: rosybrown;
         }
 
-        .header-img {
-            width: 40px;
+        .head {
+            width: 100%;
             height: 40px;
-            margin: 10px;
-            background-color: cadetblue;
+            display: flex;
+            align-items: center;
+            padding-top: 10px;
+        }
+
+        .head form {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            padding-right: 20px;
+        }
+
+
+        .body {
+            margin-bottom: 20px;
+        }
+
+        .img-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
         }
 
         .head-img {
-            width: 100%;
-            height: 100%;
+            width: 40px;
+            height: 40px;
+            margin-left: 10px;
+
         }
+
+        .header-img {
+            display: flex;
+            flex-direction: row;
+        }
+
+        .userName {
+            margin-top: 10px;
+            margin-left: 10px;
+        }
+
     </style>
 </head>
 <body>
-<div class="main">
-    <div class="top-nav"></div>
-    <%
-        UserPo user = (UserPo) session.getAttribute("user");
-        List<UserPo> concernList = (List<UserPo>) session.getAttribute("userList");
-        if (concernList != null) {
-            for (UserPo concern : concernList) {
-    %>
-    <div class="concern-item">
-        <div class="header-img">
-            <img src="<%=UserDao.queryUserImg(concern.getUserId())%>" alt="" class="head-img">
-        </div>
-        <div class="text">
-            <span class="user-name"><%=concern.getUserName()%></span><br>
-            <span>介绍</span>
-        </div>
-        <div class="">
-            <form action="#" method="post">
-                <input name="user" value="<%=user.getUserId()%>" style="display: none">
-                <input name="concern" value="<%=concern.getUserId()%>" style="display: none">
-                <button onclick="this.form.action='deleteConcern';this.form.submit();">取消关注</button>
-            </form>
+<%
+    UserPo user = (UserPo) session.getAttribute("user");
+    List<UserPo> userList = (List<UserPo>) session.getAttribute("userList");
+
+%>
+<div class="app">
+    <div class="main">
+        <div class="nav"></div>
+        <div class="weibo">
+            <%
+                if (userList != null) {
+                    for (UserPo concern : userList) {
+            %>
+            <div class="concern-item">
+                <div class="head">
+                    <form action="#" method="post">
+                        <div class="header-img">
+                            <%--点击打开用户主页--%>
+                            <%
+                                if (user != null) {
+                            %>
+                            <input name="user" value="<%=user.getUserId()%>" style="display: none">
+                            <%}%>
+                            <input name="concern" value="<%=concern.getUserId()%>" style="display: none">
+                            <button onclick="this.form.action='otherUserPage'; this.form.submit();"
+                                    style="background-color:transparent; border: none">
+                                <img src="<%=UserDao.queryUserImg(concern.getUserId())%>" class="head-img"
+                                >
+                            </button>
+                            <span
+                                    class="userName"><%=concern.getUserName()%></span>
+                        </div>
+                        <div class="add-concern">
+                            <button onclick="this.form.action='deleteConcern'; this.form.submit();"><span>取消关注</span>
+                            </button>
+                        </div>
+                    </form>
+
+                </div>
+                <div class="body">
+                    <span style="margin: 10px">介绍</span>
+
+
+                </div>
+            </div>
+            <%
+                    }
+                }else{
+            %>
+            <div>
+                <h2>还没有关注的人，去发现一些新的人吧</h2>
+            </div>
+            <%}%>
         </div>
     </div>
-    <%
-        }
-    } else {
-    %>
-    <div class="none-box">
-        <span>暂无关注的人，去发现更多的人吧</span>
-    </div>
-    <%
-        }
-    %>
 </div>
-
-
 </body>
 </html>
