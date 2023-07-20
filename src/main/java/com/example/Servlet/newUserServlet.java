@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.sql.Timestamp;
 
 @WebServlet("/newUser")
-public class newUser extends HttpServlet {
+public class newUserServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("userName");

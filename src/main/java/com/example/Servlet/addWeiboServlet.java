@@ -1,6 +1,5 @@
 package com.example.Servlet;
 
-import com.example.Dao.UserDao;
 import com.example.Dao.weiboDao;
 import com.example.po.UserPo;
 import com.example.po.weiboPo;
@@ -16,7 +15,7 @@ import java.util.List;
 
 @WebServlet("/save")
 @MultipartConfig
-public class saveWeiboServlet extends HttpServlet {
+public class addWeiboServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
@@ -39,7 +38,6 @@ public class saveWeiboServlet extends HttpServlet {
         weibo.setUserId(user.getUserId());
         weibo.setContent(req.getParameter("content"));
         int weiboId = weiboDao.addWeibo(weibo);
-        System.out.println(pathList.size());
         if(pathList.size()!=0){
             weiboDao.addImages(pathList,weiboId,user.getUserId());
         }
