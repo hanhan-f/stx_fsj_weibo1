@@ -331,7 +331,7 @@
                             <li class="list-item"><a href="weiboList" target="Right-main">热门微博</a></li>
                             <li class="list-item"><a href="concernsWeibo" target="Right-main">关注</a></li>
                             <li class="list-item"><a href="findConcern" target="Right-main">发现更多</a></li>
-                            <li class="list-item"><a href="javascript:;" target="Right-main">热搜</a></li>
+                            <li class="list-item"><a href="noUserLogin.jsp:;" target="Right-main">热搜</a></li>
                             <li class="list-item"><a href="javascript:;" target="Right-main">文娱</a></li>
                             <li class="list-item"><a href="javascript:;" target="Right-main">要闻</a></li>
                         </ul>
