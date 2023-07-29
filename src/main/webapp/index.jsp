@@ -286,7 +286,7 @@
                     <ul class="login-item">
                         <li class="top-navi-tem"><a href="login.jsp"><span class="user-login">登录</span></a></li>
                         <li class="top-navi-tem"><a href="CreatNewUser.jsp"><span class="user-new">注册</span></a></li>
-                        <li class="top-navi-tem"><a href="writeWeibo"><img src="images/write.png" alt=""></a></li>
+                        <li class="top-navi-tem"><button onclick="showModal()"><img src="images/write.png" alt="写微博"></button></li>
                     </ul>
                     <%
                         }
